@@ -2,7 +2,23 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements Iterable<T> {	
-    //defining a Node class for representing individual series of Nodes in a LinkedList
+	
+	/**
+        * LinkedList
+	* implementing custom LinkedList class like a SinglyLinkedList class in java
+        * it supports various features such as insert (front, at position, end), remove (front, at position, end), get, search, reverse, display and iterator that supports enhanced-for loops
+	* Operations:
+        * -> insert(T): insert node in main three places such as front, at position, end.
+	* -> remove(): remove node from a LinkedList at three places such as front, at position, end.
+        * -> get(P): return a node element at a specified position.
+	* -> search(T): search a node element in a LinkedList.
+        * -> reverse(): reverse a LinkedList like in-place reversal.
+	* -> iterator(): it going to return a custom iterator object that supports enhanced-for loops.
+        * -> size(): return a size of a LinkedList.
+	* -> isEmpty(): checks whether a LinkedList is empty or not.
+	*/
+	
+    //defining a Node class for representing individual series of Nodes that form a well structured LinkedList
 	private class Node<T> {
 	     T data;
 	     Node<T> next;
@@ -19,7 +35,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    this.size = 0;
 	    this.head = this.tail = null;
 	}	
-	
+
+	//insert node at front of the LinkedList
 	public void insertFront(T data) {
 	    Node<T> newNode = new Node<>(data);
 	    newNode.next = head;
@@ -29,7 +46,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    head = newNode;
 	    size++;
 	}
-	
+
+	//insert a node at specified position that is given in a function parameter
 	public void insertAtPosition(int position, T data) throws IllegalArgumentException {
 	    if(position < 0 || position > size) {
 	        throw new IllegalArgumentException("position cannot be negative as well as not more then or equal to a linkedlist length because its a 0 based index");
@@ -51,7 +69,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    temp.next = newNode;
 	    size++;
 	}
-	
+
+	//insert a node at end of the LinkedList
 	public void insertLast(T data) {
 	    if(head == null) {
 	        insertFront(data);
@@ -62,7 +81,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    tail = newNode;
 	    size++;
 	}
-	
+
+	//remove a front most node means a first node from a LinkedList
 	public void removeFront() throws Exception {
 	    if(head == null) {
 	        throw new Exception("LinkedList is empty. cannot delete elements");
@@ -75,7 +95,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    head = head.next;
 	    size--;
 	}
-	
+
+	//remove a specified position node from a given LinkedList
 	public void removeAtPosition(int position) throws Exception {
 	    if(head == null) {
 	        removeFront();
@@ -103,7 +124,8 @@ public class LinkedList<T> implements Iterable<T> {
 	        size--;
 	    }
 	}
-	
+
+	//remove a last most node from a LinkedList
 	public void removeLast() throws Exception {
 	    if(head == null || size == 1) {
 	        removeFront();
@@ -117,7 +139,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    tail = temp;
 	    size--;
 	}
-	
+
+	//get a node at specified position
 	public T get(int position) throws Exception {
 	    if(head == null) {
 	        throw new Exception("LinkedList is Empty");
@@ -137,7 +160,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    }
 	    return temp.data;
 	}
-	
+
+	//to search a specified node in a given LinkedList
 	public boolean search(T element) throws Exception {
 	    if(head == null) {
 	        throw new Exception("LinkedList is Empty");
@@ -151,7 +175,8 @@ public class LinkedList<T> implements Iterable<T> {
 	    }
 	    return false;
 	}
-	
+
+	//reverse a LinkedList like in-place reversal
 	public void reverse() {
 	    Node<T> prev  = null;
 	    Node<T> nextNode = null;
@@ -164,15 +189,18 @@ public class LinkedList<T> implements Iterable<T> {
 	    }
 	    head = prev;
 	}
-	
+
+	//find the length of the LinkedList
 	public int size() {
 	    return this.size;
 	}
-	
+
+	//checks whether LinkedList is empty or not
 	public boolean isEmpty() {
 	    return size == 0;
 	}
-	
+
+	//display entire LinkedList
 	public void display() {
 	    if(head == null) return;
 	    Node<T> temp = head;
@@ -182,11 +210,13 @@ public class LinkedList<T> implements Iterable<T> {
 	    }
 	    System.out.println("End");
 	}
-	
+
+	//get a custom iterator object that supports such as enabling enhanced-for loops
 	public Iterator<T> iterator() {
 	    return new MyIterator();
 	}
-	
+
+	//defining a custom iterator class
 	private class MyIterator implements Iterator<T> {
 	    private Node<T> current;
 	    MyIterator() {
@@ -207,7 +237,8 @@ public class LinkedList<T> implements Iterable<T> {
 	        return data;
 	    }
 	}
-	
+
+	//overriding toString() method
 	@Override
 	public String toString() {
 	    StringBuilder sb = new StringBuilder();
